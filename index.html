@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ECOCASA — O Desafio da Casa Sustentável</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ TELA INICIAL ============ -->
+<section id="tela-home" class="tela ativa" aria-label="Tela inicial">
+  <button class="btn-icon topo-cfg" data-act="cfg" aria-label="Configurações">⚙️</button>
+  <div class="home">
+    <div class="home-txt">
+      <h1><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M6 32 32 8l26 24" fill="none" stroke="#F5A524" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 30v24h36V30" fill="#0F7487"/><rect x="26" y="38" width="12" height="16" rx="2" fill="#fff"/></svg>ECOCASA</h1>
+      <h2>O Desafio da Casa Sustentável</h2>
+      <p class="lead">Transforme uma casa comum em uma casa do futuro.</p>
+      <div class="home-cta">
+        <button class="btn btn-primary btn-lg" data-act="comecar">COMEÇAR DESAFIO</button>
+        <button class="btn btn-ghost btn-lg" data-act="ranking">🏆 RANKING</button>
+      </div>
+      <ul class="home-info">
+        <li><b>🎯 Objetivo</b><span>Levar a casa até o futuro</span></li>
+        <li><b>⏱️ Duração</b><span>5 a 10 minutos</span></li>
+        <li><b>🕹️ Como jogar</b><span>Decida, invista e enfrente eventos</span></li>
+      </ul>
+    </div>
+    <div class="home-casa"><div class="casa-wrap" id="hero-casa"></div></div>
+  </div>
+</section>
+
+<!-- ============ NICKNAME ============ -->
+<section id="tela-nick" class="tela" aria-label="Identificação">
+  <div class="centro"><div class="cartao-grande">
+    <h2>Digite seu nome ou nickname</h2>
+    <p class="sub">Ele aparece durante a partida e no ranking. Não precisa ser o nome completo.</p>
+    <label for="nick-input" class="sr" style="position:absolute;left:-9999px">Nome ou nickname</label>
+    <input id="nick-input" class="campo" type="text" maxlength="16" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Ex.: Mestre Verde">
+    <div class="campo-meta"><span class="msg-erro" id="nick-msg" role="alert"></span><span id="nick-cont">0/16</span></div>
+    <div class="sugestoes" id="nick-sug" aria-label="Sugestões de nickname"></div>
+    <div class="linha-acoes">
+      <button class="btn btn-ghost" data-act="nick-voltar">← Voltar</button>
+      <button class="btn btn-primary btn-lg" data-act="nick-ok">CONTINUAR</button>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ TUTORIAL ============ -->
+<section id="tela-tutorial" class="tela" aria-label="Como jogar">
+  <div class="centro"><div class="cartao-grande tut">
+    <div class="tut-slide on">
+      <div class="tut-ic">🏠</div><h2>O desafio começou.</h2>
+      <p class="historia">Você recebeu uma casa convencional, um orçamento limitado e uma missão: transformá-la em uma casa mais eficiente, econômica e sustentável. Suas escolhas terão consequências. Você consegue chegar ao futuro?</p>
+    </div>
+    <div class="tut-slide">
+      <div class="tut-ic">⚡💧♻️🌱😊</div><h2>Cuide de 5 indicadores</h2>
+      <p>Energia, água, resíduos, natureza e conforto vão de 0 a 100. Se algum cair abaixo de 20, a casa entra em crise.</p>
+    </div>
+    <div class="tut-slide">
+      <div class="tut-ic">💰</div><h2>Decida com seus EcoCoins</h2>
+      <p>Responda perguntas, tome decisões, faça obras e enfrente eventos. Tudo tem custo e consequência, e a casa muda de verdade.</p>
+    </div>
+    <div class="tut-slide">
+      <div class="tut-ic">⚖️</div><h2>Equilíbrio vence</h2>
+      <p>Gastar tudo ou guardar tudo não funciona. Vence quem investe bem e deixa a casa equilibrada. Combine melhorias para ganhar bônus!</p>
+    </div>
+    <div class="pontos" id="tut-pontos"></div>
+    <div class="linha-acoes">
+      <button class="btn btn-ghost" data-act="tut-pular">Pular</button>
+      <button class="btn btn-primary btn-lg" id="btn-tut-prox" data-act="tut-prox">Próximo</button>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ JOGO ============ -->
+<section id="tela-jogo" class="tela" aria-label="Partida">
+  <header class="hud">
+    <div class="hud-top">
+      <div class="hud-id"><span aria-hidden="true">👤</span><b id="hud-nick"></b><span class="chip" id="hud-score" title="Pontuação atual">★ 0</span></div>
+      <div class="hud-round" id="hud-round" aria-label="Rodada"></div>
+      <div class="hud-acoes">
+        <div class="coins" aria-live="polite"><span aria-hidden="true">💰</span><b id="coins-val">10.000</b><small>EcoCoins</small><i class="dlt" id="coins-dlt" aria-hidden="true"></i></div>
+        <button class="btn-icon" data-act="cfg" aria-label="Configurações">⚙️</button>
+        <button class="btn-icon" data-act="sair" aria-label="Sair da partida">🏠</button>
+      </div>
+    </div>
+    <div class="hud-inds" id="hud-inds"></div>
+    <div class="hud-crise" id="hud-crise" role="status"></div>
+  </header>
+  <main class="palco">
+    <div class="casa-col">
+      <div class="casa-wrap" id="casa-wrap"></div>
+      <div class="evolucao" id="evolucao"></div>
+    </div>
+    <aside class="painel" id="painel" aria-live="polite"></aside>
+  </main>
+</section>
+
+<!-- ============ 10 ANOS DEPOIS ============ -->
+<section id="tela-final" class="tela" aria-label="Dez anos depois">
+  <div class="sim">
+    <div><h1>10 ANOS DEPOIS...</h1><p class="sub">Veja como ficou a casa que você construiu.</p></div>
+    <div class="sim-grid">
+      <div class="casa-wrap" id="sim-casa"></div>
+      <div id="sim-nums" class="sim-nums"></div>
+    </div>
+    <p class="aviso">Simulação do jogo: números fictícios criados para a brincadeira, não são dados científicos.</p>
+    <div class="res-acoes"><button class="btn btn-primary btn-lg" data-act="sim-res">VER RESULTADO</button></div>
+  </div>
+</section>
+
+<!-- ============ RESULTADO ============ -->
+<section id="tela-resultado" class="tela" aria-label="Resultado"><div class="res" id="res"></div></section>
+
+<!-- ============ RANKING ============ -->
+<section id="tela-ranking" class="tela" aria-label="Ranking"><div class="rank" id="rank"></div></section>
+
+<!-- ============ OVERLAYS ============ -->
+<div id="overlay" aria-live="assertive"></div>
+<div id="toasts" role="status"></div>
+<div id="attract" aria-hidden="true">
+  <div class="conteudo">
+    <h2>ECOCASA</h2>
+    <div class="casa-wrap" id="attract-casa"></div>
+    <div class="legenda" id="attract-legenda"></div>
+    <span class="toque">Toque para jogar!</span>
+  </div>
+</div>
+
+<noscript><p style="padding:24px">Este jogo precisa de JavaScript ativado.</p></noscript>
+<script src="js/data.js"></script>
+<script src="js/perguntas.js"></script>
+<script src="js/casa.js"></script>
+<script src="js/game.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
